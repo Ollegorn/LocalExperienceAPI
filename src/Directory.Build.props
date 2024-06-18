@@ -4,6 +4,6 @@
   </ImportGroup>
 
   <PropertyGroup Label="Package">
-    <PackageProjectUrl>https://github.com/Hollow-hub/AGNBustrack_API</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Ollegorn/LocalExperienceAPI</PackageProjectUrl>
   </PropertyGroup>
 </Project>
