@@ -40,17 +40,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9590
 		samples\Directory.Build.props = samples\Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalExperience.API", "src\LocalExperience.API\LocalExperience.API.csproj", "{444757A3-BBBF-49B0-A245-E7854400A389}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalExperience.Persistence", "src\LocalExperience.Persistence\LocalExperience.Persistence.csproj", "{2DF21EF0-1A48-412F-A133-C1904C9FCBA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{444757A3-BBBF-49B0-A245-E7854400A389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{444757A3-BBBF-49B0-A245-E7854400A389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{444757A3-BBBF-49B0-A245-E7854400A389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{444757A3-BBBF-49B0-A245-E7854400A389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DF21EF0-1A48-412F-A133-C1904C9FCBA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DF21EF0-1A48-412F-A133-C1904C9FCBA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DF21EF0-1A48-412F-A133-C1904C9FCBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DF21EF0-1A48-412F-A133-C1904C9FCBA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{444757A3-BBBF-49B0-A245-E7854400A389} = {52270E06-D3BB-4B8E-A261-377E460B5FD5}
+		{2DF21EF0-1A48-412F-A133-C1904C9FCBA0} = {52270E06-D3BB-4B8E-A261-377E460B5FD5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {732C3E99-FDF6-4748-A339-C3C162241038}
