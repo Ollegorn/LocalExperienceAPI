@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Ollegorn.LocalExperience.Persistence;
+using Ollegorn.LocalExperience.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-using var scope = app.Services.CreateScope();
-var ctx = scope.ServiceProvider.GetRequiredService<LocalExperienceDbContext>();
-await ctx.Activities.ToListAsync();
-//app.Run();
+
+app.Run();
+
+var a = new CreateActivityDto("dsad", "dsad", 10, 60, 3, true, 1);
+var b = a with { Name = "kaitoula" };

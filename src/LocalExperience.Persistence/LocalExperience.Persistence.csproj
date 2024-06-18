@@ -15,4 +15,8 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LocalExperience.Web.Models\LocalExperience.Web.Models.csproj" />
+  </ItemGroup>
+
 </Project>
