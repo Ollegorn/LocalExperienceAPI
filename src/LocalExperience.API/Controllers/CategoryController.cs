@@ -29,6 +29,7 @@ public class CategoryController : ControllerBase
       logger.LogEntityNotFound(nameof(Category), id);
       return TypedResults.NotFound();
     }
+
     await Task.Delay(TimeSpan.FromSeconds(10), cancellationToken);
     logger.LogCritical("returning category");
     return TypedResults.Ok(category);
