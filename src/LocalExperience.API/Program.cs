@@ -1,14 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 
+using Ollegorn.LocalExperience.API.HostedServices;
 using Ollegorn.LocalExperience.Persistence;
-using Ollegorn.LocalExperience.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddMvc();
+builder.Services.AddHostedService<FirstBackgroundService>();
 builder.Services.AddDbContext<LocalExperienceDbContext>(options => options
   .UseNpgsql(builder.Configuration.GetConnectionString("LocalExperienceDb"), npgsql => npgsql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+
+builder.Services.AddSwaggerGen(options =>
+{
+  options.CustomSchemaIds(x => x.FullName?.Replace("+", ".", StringComparison.Ordinal));
+});
 
 var app = builder.Build();
 
@@ -19,6 +26,12 @@ if (!app.Environment.IsDevelopment())
   app.UseHsts();
 }
 
+if (app.Environment.IsDevelopment())
+{
+  app.UseSwagger();
+  app.UseSwaggerUI();
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -26,9 +39,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapControllers();
 app.MapRazorPages();
-
 app.Run();
-
-var a = new CreateActivityDto("dsad", "dsad", 10, 60, 3, true, 1);
-var b = a with { Name = "kaitoula" };
