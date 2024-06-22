@@ -7,7 +7,7 @@ using Ollegorn.LocalExperience.API.Extentions;
 using Ollegorn.LocalExperience.API.HostedServices;
 using Ollegorn.LocalExperience.Persistence.Models;
 
-[Route("api/v1/category")]
+[Route("api/v1/category2")]
 [ApiController]
 public class CategoryController : ControllerBase
 {

@@ -1,3 +1,5 @@
+using Asp.Versioning;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -13,6 +15,7 @@ builder.Services.AddMvc();
 builder.Services.AddHostedService<FirstBackgroundService>();
 builder.Services.AddDbContext<LocalExperienceDbContext>(options => options
   .UseNpgsql(builder.Configuration.GetConnectionString("LocalExperienceDb"), npgsql => npgsql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+builder.Services.AddProblemDetails();
 
 builder.Services.AddSwaggerDefaults();
 builder.Services.AddSwaggerGen(o =>
@@ -22,6 +25,7 @@ builder.Services.AddSwaggerGen(o =>
 
   o.IncludeXmlComments(xmlPath);
 });
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddApiVersioning(o =>
 {
@@ -36,6 +40,8 @@ builder.Services.AddApiVersioning(o =>
   .EnableApiVersionBinding();
 
 builder.Services.AddSwaggerVersioning(new OpenApiInfo { Title = "LocalExperienceAPI", Description = "This is a short description" });
+
+builder.Services.AddEndpoints(typeof(Program).Assembly);
 
 var app = builder.Build();
 
@@ -67,6 +73,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapEndpoints();
 app.MapControllers();
 app.MapRazorPages();
 app.Run();
