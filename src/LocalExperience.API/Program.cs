@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
+using Ollegorn.LocalExperience.API.DependencyInjectionExtentions;
 using Ollegorn.LocalExperience.API.HostedServices;
 using Ollegorn.LocalExperience.Persistence;
 
@@ -12,9 +13,13 @@ builder.Services.AddHostedService<FirstBackgroundService>();
 builder.Services.AddDbContext<LocalExperienceDbContext>(options => options
   .UseNpgsql(builder.Configuration.GetConnectionString("LocalExperienceDb"), npgsql => npgsql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddSwaggerDefaults();
+builder.Services.AddSwaggerGen(o =>
 {
-  options.CustomSchemaIds(x => x.FullName?.Replace("+", ".", StringComparison.Ordinal));
+  var xmlFile = $"{typeof(Program).Assembly.GetName().Name}.xml";
+  var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+  o.IncludeXmlComments(xmlPath);
 });
 
 var app = builder.Build();
@@ -26,9 +31,10 @@ if (!app.Environment.IsDevelopment())
   app.UseHsts();
 }
 
+app.UseSwagger();
+
 if (app.Environment.IsDevelopment())
 {
-  app.UseSwagger();
   app.UseSwaggerUI();
 }
 
