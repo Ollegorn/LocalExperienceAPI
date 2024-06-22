@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 using Ollegorn.LocalExperience.API.DependencyInjectionExtentions;
 using Ollegorn.LocalExperience.API.HostedServices;
@@ -22,6 +23,20 @@ builder.Services.AddSwaggerGen(o =>
   o.IncludeXmlComments(xmlPath);
 });
 
+builder.Services.AddApiVersioning(o =>
+{
+  o.ReportApiVersions = true;
+  o.AssumeDefaultVersionWhenUnspecified = true;
+})
+  .AddApiExplorer(o =>
+  {
+    o.SubstituteApiVersionInUrl = true;
+    o.GroupNameFormat = "'v'VVV";
+  })
+  .EnableApiVersionBinding();
+
+builder.Services.AddSwaggerVersioning(new OpenApiInfo { Title = "LocalExperienceAPI", Description = "This is a short description" });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,7 +50,14 @@ app.UseSwagger();
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseSwaggerUI();
+  app.UseSwaggerUI(o =>
+  {
+    var descriptions = app.DescribeApiVersions();
+    foreach (var desc in descriptions)
+    {
+      o.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", desc.GroupName.ToUpperInvariant());
+    }
+  });
 }
 
 app.UseHttpsRedirection();
