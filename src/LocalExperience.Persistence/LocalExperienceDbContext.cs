@@ -4,14 +4,23 @@ using Microsoft.EntityFrameworkCore;
 
 using Ollegorn.LocalExperience.Persistence.Models;
 
-public class LocalExperienceDbContext : DbContext
+public class LocalExperienceDbContext(DbContextOptions<LocalExperienceDbContext> options)
+  : DbContext(options)
 {
-  public LocalExperienceDbContext(DbContextOptions<LocalExperienceDbContext> options)
-    : base(options)
-  {
-  }
-
   public DbSet<Category> Categories { get; set; }
 
   public DbSet<Activity> Activities { get; set; }
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    ArgumentNullException.ThrowIfNull(modelBuilder);
+
+    foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+    {
+      foreach (var foreignKey in entityType.GetForeignKeys())
+      {
+        foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+      }
+    }
+  }
 }

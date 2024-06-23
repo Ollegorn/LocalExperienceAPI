@@ -1,11 +1,15 @@
 using Asp.Versioning;
 
+using FluentValidation;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 using Ollegorn.LocalExperience.API.DependencyInjectionExtentions;
 using Ollegorn.LocalExperience.API.HostedServices;
+using Ollegorn.LocalExperience.API.Validators;
 using Ollegorn.LocalExperience.Persistence;
+using Ollegorn.LocalExperience.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,8 @@ builder.Services.AddHostedService<FirstBackgroundService>();
 builder.Services.AddDbContext<LocalExperienceDbContext>(options => options
   .UseNpgsql(builder.Configuration.GetConnectionString("LocalExperienceDb"), npgsql => npgsql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 builder.Services.AddProblemDetails();
+
+builder.Services.AddScoped<IValidator<CreateCategoryDto>, CreateCategoryValidator>();
 
 builder.Services.AddSwaggerDefaults();
 builder.Services.AddSwaggerGen(o =>

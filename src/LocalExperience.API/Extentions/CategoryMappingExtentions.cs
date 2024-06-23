@@ -13,4 +13,13 @@ public static class CategoryMappingExtentions
 
     return dto;
   }
+
+  public static ICollection<RetrieveCategoryDto> ToRetrieveCategoryDtoList(this ICollection<Category> categories)
+  {
+    ArgumentNullException.ThrowIfNull(categories);
+
+    var dtos = categories.Select(c => c.ToRetrieveCategoryDto()).ToList();
+
+    return dtos;
+  }
 }

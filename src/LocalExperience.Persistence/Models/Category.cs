@@ -1,5 +1,7 @@
 namespace Ollegorn.LocalExperience.Persistence.Models;
 
+using System.ComponentModel.DataAnnotations;
+
 using Ollegorn.LocalExperience.Persistence.Base;
 
 public sealed class Category : LocalExperienceEntity<long>
