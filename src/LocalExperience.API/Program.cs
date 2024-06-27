@@ -25,6 +25,9 @@ builder.Services.AddScoped<IValidator<CreateCategoryDto>, CreateCategoryValidato
 builder.Services.AddScoped<IValidator<UpdateCategoryDto>, UpdateCategoryValidator>();
 builder.Services.AddScoped<IValidator<CreateActivityDto>, CreateActivityValidator>();
 builder.Services.AddScoped<IValidator<UpdateActivityDto>, UpdateActivityValidator>();
+builder.Services.AddScoped<IValidator<CreateBookingDto>, CreateBookingValidator>();
+builder.Services.AddScoped<IValidator<UpdateBookingDto>, UpdateBookingValidator>();
+
 
 builder.Services.AddSwaggerDefaults();
 builder.Services.AddSwaggerGen(o =>

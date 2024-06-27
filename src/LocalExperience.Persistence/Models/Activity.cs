@@ -28,5 +28,5 @@ public sealed class Activity : LocalExperienceEntity<long>
 
   public Category Category { get; set; } = default!;
 
-  public IReadOnlyCollection<Booking> Bookings { get; set; } = [];
+  public ICollection<Booking> Bookings { get; set; } = [];
 }

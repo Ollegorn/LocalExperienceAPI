@@ -11,6 +11,8 @@ public class LocalExperienceDbContext(DbContextOptions<LocalExperienceDbContext>
 
   public DbSet<Activity> Activities { get; set; }
 
+  public DbSet<Booking> Bookings { get; set; }
+
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     ArgumentNullException.ThrowIfNull(modelBuilder);

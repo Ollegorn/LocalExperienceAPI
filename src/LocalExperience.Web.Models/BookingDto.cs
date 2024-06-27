@@ -8,7 +8,8 @@ public record CreateBookingDto(
   decimal TotalPrice,
   string CustomersNumber,
   string CustomersEmail,
-  string Coupon);
+  string Coupon,
+  long ActivityId);
 
 public record UpdateBookingDto(
   DateTime ReservedFor,
@@ -17,7 +18,8 @@ public record UpdateBookingDto(
   decimal TotalPrice,
   string CustomersNumber,
   string CustomersEmail,
-  string Coupon);
+  string Coupon,
+  long ActivityId);
 
 public record RetrieveBookingDto(
   Guid Id,
@@ -27,4 +29,5 @@ public record RetrieveBookingDto(
   decimal TotalPrice,
   string CustomersNumber,
   string CustomersEmail,
-  string Coupon);
+  string Coupon,
+  long ActivityId);
