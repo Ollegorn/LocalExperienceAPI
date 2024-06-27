@@ -10,5 +10,5 @@ public sealed class Category : LocalExperienceEntity<long>
 
   public string Description { get; set; } = string.Empty;
 
-  public IReadOnlyCollection<Activity> Activities { get; set; } = [];
+  public ICollection<Activity> Activities { get; set; } = [];
 }

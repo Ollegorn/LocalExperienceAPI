@@ -2,21 +2,7 @@
 namespace Ollegorn.LocalExperience.Persistence.Models;
 
 using Ollegorn.LocalExperience.Persistence.Base;
-
-[Flags]
-public enum Days
-{
-  None = 0,
-  Monday = 1,
-  Tuesday = Monday << 1,
-  Wednesday = Tuesday << 1,
-  Thursday = Wednesday << 1,
-  Friday = Thursday << 1,
-  Saturday = Friday << 1,
-  Sunday = Saturday << 1,
-
-  Weekend = Saturday | Sunday,
-}
+using Ollegorn.LocalExperience.Web.Models;
 
 public sealed class Activity : LocalExperienceEntity<long>
 {

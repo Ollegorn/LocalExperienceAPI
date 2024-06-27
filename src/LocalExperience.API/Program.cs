@@ -22,6 +22,9 @@ builder.Services.AddDbContext<LocalExperienceDbContext>(options => options
 builder.Services.AddProblemDetails();
 
 builder.Services.AddScoped<IValidator<CreateCategoryDto>, CreateCategoryValidator>();
+builder.Services.AddScoped<IValidator<UpdateCategoryDto>, UpdateCategoryValidator>();
+builder.Services.AddScoped<IValidator<CreateActivityDto>, CreateActivityValidator>();
+builder.Services.AddScoped<IValidator<UpdateActivityDto>, UpdateActivityValidator>();
 
 builder.Services.AddSwaggerDefaults();
 builder.Services.AddSwaggerGen(o =>

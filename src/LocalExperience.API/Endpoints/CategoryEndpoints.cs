@@ -104,6 +104,7 @@ public class CategoryEndpoints(ILogger<CategoryEndpoints> logger) : IEndpoint
       return TypedResults.Conflict("There are Activities registered in this Category.");
     }
 
+    await dbContext.SaveChangesAsync(cancellationToken);
     return TypedResults.NoContent();
   }
 
