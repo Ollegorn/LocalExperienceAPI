@@ -31,7 +31,7 @@ public class CategoryController : ControllerBase
     }
 
     await Task.Delay(TimeSpan.FromSeconds(10), cancellationToken);
-    logger.LogCritical("returning category");
+    logger.LogCritical("returning category {CategoryId}", category.Id);
     return TypedResults.Ok(category);
   }
 

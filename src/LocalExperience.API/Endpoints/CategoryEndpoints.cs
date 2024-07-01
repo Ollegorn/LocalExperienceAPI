@@ -48,6 +48,7 @@ public class CategoryEndpoints(ILogger<CategoryEndpoints> logger) : IEndpoint
 
     if (category == null)
     {
+      logger.LogEntityNotFound(nameof(Category), id);
       return TypedResults.NotFound();
     }
 

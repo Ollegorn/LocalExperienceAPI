@@ -6,12 +6,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 using Ollegorn.LocalExperience.API.DependencyInjectionExtentions;
+using Ollegorn.LocalExperience.API.Extentions;
 using Ollegorn.LocalExperience.API.HostedServices;
 using Ollegorn.LocalExperience.API.Validators;
 using Ollegorn.LocalExperience.Persistence;
 using Ollegorn.LocalExperience.Web.Models;
 
+using Serilog;
+using Serilog.Core;
+using Serilog.Extensions.Logging;
+
+using ILogger = Microsoft.Extensions.Logging.ILogger;
+
+Log.Logger = new LoggerConfiguration()
+  .ConfigureStartupLogger()
+  .CreateBootstrapLogger();
+
+using var loggerProvider = new SerilogLoggerProvider();
+ILogger logger = loggerProvider.CreateLogger(nameof(Program));
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog((_, services, loggerConfiguration) => loggerConfiguration
+  .ConfigureRuntimeLogger(builder.Configuration, builder.Environment));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -27,7 +43,6 @@ builder.Services.AddScoped<IValidator<CreateActivityDto>, CreateActivityValidato
 builder.Services.AddScoped<IValidator<UpdateActivityDto>, UpdateActivityValidator>();
 builder.Services.AddScoped<IValidator<CreateBookingDto>, CreateBookingValidator>();
 builder.Services.AddScoped<IValidator<UpdateBookingDto>, UpdateBookingValidator>();
-
 
 builder.Services.AddSwaggerDefaults();
 builder.Services.AddSwaggerGen(o =>
@@ -89,3 +104,10 @@ app.MapEndpoints();
 app.MapControllers();
 app.MapRazorPages();
 app.Run();
+
+Log.CloseAndFlush();
+
+public partial class Program
+{
+  internal static readonly LoggingLevelSwitch levelSwitch = new();
+}
